@@ -97,46 +97,42 @@ class OpenStub:
 
     def printSWR(self):
 
-        print("------------------------------------------")
-        print("SWR =",self.getSWR())
+        print("------------------------------------------");
+        print("SWR =",self.getSWR());
 
     ###########################################################
 
     def printImpedance(self):
+        print("------------------------------------------");
+        print("Carga");
+        print(self.Zload);
 
-        print("------------------------------------------")
-        print("Carga")
-        print(self.Zload)
+        print("------------------------------------------");
+        print("Stub");
+        print(self.Zstub);
 
-        print("------------------------------------------")
-        print("Stub")
-        print(self.Zstub)
+        print("------------------------------------------");
+        print("Impedancia equivalente");
+        print(self.Zin);
 
-        print("------------------------------------------")
-        print("Impedancia equivalente")
-        print(self.Zin)
-
-        print("Normalizada")
-        print(self.zn)
+        print("Normalizada");
+        print(self.zn);
 
     ###########################################################
 
     def printAdmitance(self):
+        print("------------------------------------------");
+        print("Admitancia carga");
+        print(self.Yload);
+        print("------------------------------------------");
+        print("Admitancia stub");
+        print(self.Ystub);
 
-        print("------------------------------------------")
-        print("Admitancia carga")
-        print(self.Yload)
-
-        print("------------------------------------------")
-        print("Admitancia stub")
-        print(self.Ystub)
-
-        print("------------------------------------------")
-        print("Admitancia equivalente")
-        print(self.Yin)
-
-        print("Normalizada")
-        print(self.yn)
+        print("------------------------------------------");
+        print("Admitancia equivalente");
+        print(self.Yin);
+        print("Normalizada");
+        print(self.yn);
 
     ###########################################################
 
@@ -152,8 +148,8 @@ class OpenStub:
     ###########################################################
 
     def plotImpedanceCircles(self, theta, colorR='black', colorX='black'):
-        radioR = 1/(self.r+1);
-        xR = radioR*np.cos(theta) + self.r/(self.r+1);
+        radioR = 1/(self.r + 1);
+        xR = radioR*np.cos(theta) + self.r/(self.r + 1);
         yR = radioR*np.sin(theta);
         plt.plot(xR, yR, color=colorR, lw=2);
         if np.abs(self.x) > 1e-10:
@@ -165,42 +161,21 @@ class OpenStub:
     ###########################################################
 
     def plotAdmitanceCircles(self, theta, colorG='red', colorB='red'):
-
-        radioG = 1/(self.g+1)
-
-        xG = radioG*(np.cos(theta)-self.g)
-        yG = radioG*np.sin(theta)
-
-        plt.plot(xG,
-                 yG,
-                 color=colorG,
-                 lw=2)
-
+        radioG = 1/(self.g + 1);
+        xG = radioG*(np.cos(theta) - self.g);
+        yG = radioG*np.sin(theta);
+        plt.plot(xG, yG, color=colorG, lw=2);
         if np.abs(self.b) > 1e-10:
-
-            radioB = 1/self.b
-
-            xB = radioB*np.cos(theta)-1
-            yB = radioB*(np.sin(theta)-1)
-
-            plt.plot(xB,
-                     yB,
-                     color=colorB,
-                     lw=2)
-
+            radioB = 1/self.b;
+            xB = radioB*np.cos(theta) - 1;
+            yB = radioB*(np.sin(theta) - 1);
+            plt.plot(xB, yB, color=colorB, lw=2);
     ###########################################################
-
     def labelOnChart(self, band=True):
-
         if not band:
             return
-
-        #------------------------------------
         # Impedancia equivalente
-        #------------------------------------
-
         if np.imag(self.Zin) < 0:
-
             plt.annotate(
                 r'$Z_{eq}= %.2f-j%.2f\,\Omega$'
                 %(np.real(self.Zin),
@@ -208,10 +183,8 @@ class OpenStub:
                 xy=(-0.95,0.95),
                 xytext=(-0.95,0.95),
                 textcoords='offset points',
-                ha='left')
-
+                ha='left');
         else:
-
             plt.annotate(
                 r'$Z_{eq}= %.2f+j%.2f\,\Omega$'
                 %(np.real(self.Zin),
@@ -219,12 +192,8 @@ class OpenStub:
                 xy=(-0.95,0.95),
                 xytext=(-0.95,0.95),
                 textcoords='offset points',
-                ha='left')
-
-        #------------------------------------
+                ha='left');
         # Admitancia equivalente
-        #------------------------------------
-
         if np.imag(self.Yin) < 0:
 
             plt.annotate(
@@ -234,10 +203,8 @@ class OpenStub:
                 xy=(-0.95,0.82),
                 xytext=(-0.95,0.82),
                 textcoords='offset points',
-                ha='left')
-
+                ha='left');
         else:
-
             plt.annotate(
                 r'$Y_{eq}= %.4f+j%.4f\,S$'
                 %(np.real(self.Yin),
@@ -245,35 +212,27 @@ class OpenStub:
                 xy=(-0.95,0.82),
                 xytext=(-0.95,0.82),
                 textcoords='offset points',
-                ha='left')
-
-        #------------------------------------
+                ha='left');
         # Información del stub
-        #------------------------------------
-
         if np.imag(self.Zstub) < 0:
 
             texto = r'$Z_{stub}=%.2f-j%.2f\,\Omega$' % (
                 np.real(self.Zstub),
-                -np.imag(self.Zstub))
+                -np.imag(self.Zstub));
 
         else:
 
             texto = r'$Z_{stub}=%.2f+j%.2f\,\Omega$' % (
                 np.real(self.Zstub),
-                np.imag(self.Zstub))
+                np.imag(self.Zstub));
 
         plt.annotate(
             texto,
             xy=(-0.95,0.69),
             xytext=(-0.95,0.69),
             textcoords='offset points',
-            ha='left')
-
-        #------------------------------------
+            ha='left');
         # Gamma
-        #------------------------------------
-
         plt.annotate(
             r'$|\Gamma|=%.3f\angle%.2f^\circ$'
             %(self.mag,
@@ -281,16 +240,15 @@ class OpenStub:
             xy=(-0.95,-0.90),
             xytext=(-0.95,-0.90),
             textcoords='offset points',
-            ha='left')
+            ha='left');
 
     ###########################################################
-
     def __add__(self, other):
 
         if hasattr(other, "getImpedance"):
-            other = other.getImpedance()
+            other = other.getImpedance();
 
-        return self.getImpedance() + other
+        return self.getImpedance() + other;
 
     ###########################################################
 
@@ -299,7 +257,7 @@ class OpenStub:
         if hasattr(other, "getImpedance"):
             other = other.getImpedance()
 
-        return self.getImpedance() - other
+        return self.getImpedance() - other;
 
     ###########################################################
 
@@ -308,40 +266,40 @@ class OpenStub:
         if hasattr(other, "getImpedance"):
             other = other.getImpedance()
 
-        return self.getImpedance() * other
+        return self.getImpedance() * other;
 
     ###########################################################
 
     def __truediv__(self, other):
 
         if hasattr(other, "getImpedance"):
-            other = other.getImpedance()
+            other = other.getImpedance();
 
-        return self.getImpedance() / other
+        return self.getImpedance() / other;
 
     ###########################################################
 
     def __radd__(self, other):
-        return other + self.getImpedance()
+        return other + self.getImpedance();
 
     ###########################################################
 
     def __rsub__(self, other):
-        return other - self.getImpedance()
+        return other - self.getImpedance();
 
     ###########################################################
 
     def __rmul__(self, other):
-        return other * self.getImpedance()
+        return other * self.getImpedance();
 
     ###########################################################
 
     def __rtruediv__(self, other):
-        return other / self.getImpedance()
+        return other / self.getImpedance();
 
     ###########################################################
 
     def __repr__(self):
-        return f"{self.getImpedance():.4f}"
+        return f"{self.getImpedance():.4f}";
 
  
