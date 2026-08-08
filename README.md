@@ -374,7 +374,7 @@ If you use `smithchart_tool` in academic research, please cite the associated re
 The repository includes a `CITATION.cff` file containing the recommended citation information and the author's ORCID.
 
 **Author:** Alan Rodríguez Bojorjes
-**ORCID:** https://orcid.org/0009-0005-9129-1679
+**ORCID:** https://orcid.org/0009-0002-3418-6299
 
 ## License
 
@@ -387,6 +387,6 @@ This project is distributed under the MIT License. See the `LICENSE` file for de
 Universidad Autónoma de San Luis Potosí
 San Luis Potosí, Mexico
 
-ORCID: https://orcid.org/0009-0005-9129-1679
+ORCID: https://orcid.org/0009-0002-3418-6299
 
 GitHub: https://github.com/ZeroPole03
