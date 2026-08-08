@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+title: "smithchart_tool"
+message: "If you use this software, please cite it as follows."
+
+type: software
+
+authors:
+  - family-names: "Rodríguez Bojorjes"
+    given-names: "Alan"
+    orcid: "https://orcid.org/0009-0005-9129-1679"
+
+repository-code: "https://github.com/ZeroPole03/smithchart_tool"
+
+url: "https://github.com/ZeroPole03/smithchart_tool"
+
+license: "MIT"
+
+version: "1.0.0"
+
+date-released: "2026-08-08"
+
+abstract: >
+  Python implementation of Smith chart impedance and admittance
+  transformations based on Möbius transformations, including
+  transmission lines, stubs, impedance matching, and visualization
+  of impedance trajectories.
+
+keywords:
+  - Smith chart
+  - Möbius transformation
+  - impedance matching
+  - microwave engineering
+  - transmission lines
+  - Python
+  - microwave circuits
