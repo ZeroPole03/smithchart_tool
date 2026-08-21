@@ -123,7 +123,7 @@ Z.getAdmitance()
 The impedance value can also be labeled directly on the Smith Chart:
 
 ```python
-Z.labelOnChart()
+Z.labelOnChart(True, x0, y0)
 ```
 
 ## Admittance
@@ -151,7 +151,7 @@ Y.addToSmithChart(theta)
 The admittance can be labeled directly on the Smith Chart:
 
 ```python
-Y.labelOnChart()
+Y.labelOnChart(True, x0, y0)
 ```
 
 The class also provides functionality for representing admittance transformations associated with transmission lines:
@@ -208,7 +208,7 @@ TL1.plotImpedanceCircles(theta, "Transmission Line")
 The transformed impedance can be labeled on the Smith Chart:
 
 ```python
-TL1.labelOnChart(True)
+TL1.labelOnChart(True, x0, y0)
 ```
 
 ## Open-Circuit Stub
