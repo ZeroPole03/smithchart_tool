@@ -171,7 +171,7 @@ class OpenStub:
             yB = radioB*(np.sin(theta) - 1);
             plt.plot(xB, yB, color=colorB, lw=2);
     ###########################################################
-    def labelOnChart(self, band=True):
+    def labelOnChart(self, band=True, x0 = -0.95, y0 = 0.95):
         if not band:
             return
         # Impedancia equivalente
@@ -180,8 +180,8 @@ class OpenStub:
                 r'$Z_{eq}= %.2f-j%.2f\,\Omega$'
                 %(np.real(self.Zin),
                   -np.imag(self.Zin)),
-                xy=(-0.95,0.95),
-                xytext=(-0.95,0.95),
+                xy=(x0, y0),
+                xytext=(x0, y0),
                 textcoords='offset points',
                 ha='left');
         else:
@@ -189,8 +189,8 @@ class OpenStub:
                 r'$Z_{eq}= %.2f+j%.2f\,\Omega$'
                 %(np.real(self.Zin),
                   np.imag(self.Zin)),
-                xy=(-0.95,0.95),
-                xytext=(-0.95,0.95),
+                xy=(x0, y0),
+                xytext=(x0, y0),
                 textcoords='offset points',
                 ha='left');
         # Admitancia equivalente
@@ -200,8 +200,8 @@ class OpenStub:
                 r'$Y_{eq}= %.4f-j%.4f\,S$'
                 %(np.real(self.Yin),
                   -np.imag(self.Yin)),
-                xy=(-0.95,0.82),
-                xytext=(-0.95,0.82),
+                xy=(x0, y0 - 0.13),
+                xytext=(x0, y0 - 0.13),
                 textcoords='offset points',
                 ha='left');
         else:
@@ -209,8 +209,8 @@ class OpenStub:
                 r'$Y_{eq}= %.4f+j%.4f\,S$'
                 %(np.real(self.Yin),
                   np.imag(self.Yin)),
-                xy=(-0.95,0.82),
-                xytext=(-0.95,0.82),
+                xy=(x0, y0 - 0.13),
+                xytext=(x0, y0 - 0.13),
                 textcoords='offset points',
                 ha='left');
         # Información del stub
@@ -228,8 +228,8 @@ class OpenStub:
 
         plt.annotate(
             texto,
-            xy=(-0.95,0.69),
-            xytext=(-0.95,0.69),
+            xy=(x0, y0 - 0.26),
+            xytext=(x0, y0 - 0.26),
             textcoords='offset points',
             ha='left');
         # Gamma
@@ -237,8 +237,8 @@ class OpenStub:
             r'$|\Gamma|=%.3f\angle%.2f^\circ$'
             %(self.mag,
               np.angle(self.gamma,deg=True)),
-            xy=(-0.95,-0.90),
-            xytext=(-0.95,-0.90),
+            xy=(x0, y0 - 1.9),
+            xytext=(x0, y0 - 1.9),
             textcoords='offset points',
             ha='left');
 
