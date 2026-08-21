@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+update.sh
 
 # Virtual environment
 entorno/
