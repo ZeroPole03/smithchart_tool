@@ -13,12 +13,12 @@ class TransmissionLine:
     swr = 0; e = 1; phase = 0; load = 1.0 + 1.0j;
     caplength = 1e-2; Z0 = 50 + 1j*0; 
 
-    def __init__(self, Z0, Impedance, deg, f0):
+    def __init__(self, Z0, Impedance, phase, f0):
         self.load = Impedance;
         self.f0 = f0;
-        self.Z0 = Z0;
+        self.Z0 = Z0; 
         # Fase eléctrica (2βl)
-        self.phase = 2.0 * deg;
+        self.phase = 2.0 * np.deg2rad(phase);
         # Coeficiente de reflexión referido a la impedancia
         # característica de la línea
         self.gammaLine = (self.load.Zl - self.Z0) / (self.load.Zl + self.Z0);
