@@ -7,12 +7,12 @@ import matplotlib.pyplot as plt
 from .impedance import Impedance
 
 class TransmissionLine:
-    length = 1e-2; rin = 1.0; xin = 1.0; 
-    ginr = 1.0; giin = 1.0; lamda = 6e-2; f0 = 2.5e9;
-    alpha = 0.0; Zin = 0.0; Gin = 1.0 + 1j; cadena = ''; 
-    swr = 0; e = 1; phase = 0; load = 1.0 + 1.0j;
-    caplength = 1e-2; Z0 = 50 + 1j*0; 
-
+    # length = 1e-2; rin = 1.0; xin = 1.0; 
+    # ginr = 1.0; giin = 1.0; lamda = 6e-2; f0 = 2.5e9;
+    # alpha = 0.0; Zin = 0.0; Gin = 1.0 + 1j; cadena = ''; 
+    # swr = 0; e = 1; phase = 0; load = 1.0 + 1.0j;
+    # caplength = 1e-2; Z0 = 50 + 1j*0; 
+    c = 3e8;
     def __init__(self, Z0, Impedance, phase, f0):
         self.load = Impedance;
         self.f0 = f0;
@@ -77,19 +77,19 @@ class TransmissionLine:
         # Círculo reactivo de impedancia de entrada
         plt.plot(xi, yi, color = color2, lw = 2);
 
-    def labelOnChart(self, band):
+    def labelOnChart(self, band, x0 = -0.95, y0 = 0.85):
         if(band):
             if(np.imag(self.Zin) < 0):
                 plt.annotate(r'$Z_{in}= %.2f - j%.2f\,\Omega$' % (np.real(self.Zin), -1*np.imag(self.Zin)),
-                            xy = (-0.95, 0.85), 
-                            xytext = (-0.95, 0.85),
+                            xy = (x0, y0), 
+                            xytext = (x0, y0),
                             textcoords = 'offset points',
                             ha = 'left',
                             va = 'center');
             else:
                 plt.annotate(r'$Z_{in}= %.2f + j%.2f\,\Omega$' % (np.real(self.Zin), np.imag(self.Zin)),
-                                xy = (-0.95, 0.85), 
-                                xytext = (-0.95, 0.85),
+                                xy = (x0, y0), 
+                                xytext = (x0, y0),
                                 textcoords = 'offset points',
                                 ha = 'left',
                                 va = 'center');
@@ -128,68 +128,6 @@ class TransmissionLine:
         print("------------------------------------------------------------");
         print("El SWR de la carga: ", 
             self.load.Zl, " es: ", self.swr);
-
-    def openCapacitanceLine(self, cap = 2e-12, z0 = 50.0, plot = True):
-        d1 = self.lamda / (2 * np.pi);
-        d1 *= np.atan(2 * np.pi * self.f0 * z0 * cap);
-        period = self.lamda * 0.5;
-        print("------------------------------------------------------------");
-        print("La distancia para la capacitancia en circuito abierto es: "); 
-        print(f'{(d1*1e3):.3f}', " + n", f'{(period*1e3):.3f}', " mm");
-
-        if (plot):
-            rad2 = -1/np.tan((2 * np.pi/self.lamda) * d1);
-            gamr = (rad2**2 - 1) / (1 + rad2**2);
-            gami = 2 * rad2 / (1 + rad2**2);
-            plt.scatter(gamr, gami, color = 'blue');
-        else: 
-            pass
-
-    def openInductanceLine(self, L = 10e-9, z0 = 50.0, plot = True):
-        d2 = self.lamda / (2 * np.pi);
-        d2 *= (np.pi - np.atan(z0/(2*np.pi*f0*L)));
-        period = self.lamda * 0.5;
-        print("------------------------------------------------------------");
-        print("La distancia para la inductancia en circuito abierto es: ", f'{L:.5f}', " es:");
-        print(f'{(d2*1e3):.3f}', " + n", f'{(period*1e3):.3f}', " mm");
-        if (plot):
-            rad2 = -1/np.tan((2 * np.pi/self.lamda) * d2);
-            gamr = (rad2**2 - 1) / (1 + rad2**2);
-            gami = 2 * rad2 / (1 + rad2**2);
-            plt.scatter(gamr, gami, color = 'red');
-        else: 
-            pass
-
-    def shortCapacitanceLine(self, cap = 5e-12, z0 = 50.0, plot = True):
-        d1 = self.lamda / (2 * np.pi);
-        d1 *= (np.pi - np.atan(1/(2*np.pi*self.f0*cap*z0)));
-        period = self.lamda * 0.5;
-        print("------------------------------------------------------------");
-        print("La distancia para la capacitancia en circuito abierto es: "); 
-        print(f'{(d1*1e3):.3f}', " + n", f'{(period*1e3):.3f}', " mm");
-
-        if (plot):
-            rad2 = -1/np.tan((2 * np.pi/self.lamda) * d1);
-            gamr = (rad2**2 - 1) / (1 + rad2**2);
-            gami = 2 * rad2 / (1 + rad2**2);
-            plt.scatter(gamr, gami, color = 'blue');
-        else: 
-            pass 
-
-    def shortInductanceLine(self, L = 10e-9, z0 = 50.0, plot = True):
-        d2 = self.lamda / (2 * np.pi);
-        d2 *= np.atan((2*np.pi*f0*L)/z0);
-        period = self.lamda * 0.5;
-        print("------------------------------------------------------------");
-        print("La distancia para la inductancia en circuito abierto es: ", f'{L:.5f}', " es:");
-        print(f'{(d2*1e3):.3f}', " + n", f'{(period*1e3):.3f}', " mm");
-        if (plot):
-            rad2 = -1/np.tan((2 * np.pi/self.lamda) * d2);
-            gamr = (rad2**2 - 1) / (1 + rad2**2);
-            gami = 2 * rad2 / (1 + rad2**2);
-            plt.scatter(gamr, gami, color = 'red');
-        else: 
-            pass
 
     def getImpedance(self):
         return self.Zin;
