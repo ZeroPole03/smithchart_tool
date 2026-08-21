@@ -7,12 +7,12 @@ import matplotlib.pyplot as plt
 from .impedance import Impedance
 
 class Admittance:
-    g = 1; b = 1; y = 1.0 + 1j; 
-    load = 50.0 + 1j*50.0; z0 = 50.0;
-    angle = 0; mag = 1.0; tl = 1.0 + 1.0j;
-    gin = 1; giin = 1; yin = gin + 1j*giin;
-    grot = 1 + 1j; gammar = 1.0; gammai = 1.0;
-
+    # g = 1; b = 1; y = 1.0 + 1j; 
+    # load = 50.0 + 1j*50.0; z0 = 50.0;
+    # angle = 0; mag = 1.0; tl = 1.0 + 1.0j;
+    # gin = 1; giin = 1; yin = gin + 1j*giin;
+    # grot = 1 + 1j; gammar = 1.0; gammai = 1.0;
+    c = 3e8;
     def __init__(self, z0, Impedance):
         self.load = Impedance;
         self.z0 = z0;

@@ -8,10 +8,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class Impedance:
-    z0 = 50.0 + 0*1j; Zl = 1 + 1j; zn = 0.5 + 1j * 0.5; 
-    gi = 1; gr = 1; gamma0 = 0.5 + 1j * 0.5; resis = 0.5;
-    react = 0.5; gammain = 0.5 + 1j * 0.5; Zin = 50 + 1j* 50;
-    phase = 0; angle = np.pi; cadena = '';
+    # z0 = 50.0 + 0*1j; Zl = 1 + 1j; zn = 0.5 + 1j * 0.5; 
+    # gi = 1; gr = 1; gamma0 = 0.5 + 1j * 0.5; resis = 0.5;
+    # react = 0.5; gammain = 0.5 + 1j * 0.5; Zin = 50 + 1j* 50;
+    # phase = 0; angle = np.pi; cadena = '';
+    c = 3e8;
     def __init__(self, z0, Zl):
         self.z0 = z0; 
         self.Zl = Zl;
@@ -26,12 +27,12 @@ class Impedance:
     def getGamma(self):
         return self.gamma0;
 
-    def labelOnChart(self, band):
+    def labelOnChart(self, band, x0 = -0.95, y0 = 0.95):
         if(band):
             if(self.react < 0):
                 plt.annotate(r'$Z_{in}= %.2f - j%.2f\,\Omega$' % (self.resis*self.z0, -1*self.z0*self.react),
-                            xy = (-0.95, 0.95), 
-                            xytext = (-0.95, 0.95),
+                            xy = (x0, y0), 
+                            xytext = (x0, y0),
                             textcoords = 'offset points',
                             ha = 'left',
                             va = 'center');
@@ -43,8 +44,8 @@ class Impedance:
                             va = 'center');
             else:
                 plt.annotate(r'$Z_{in}= %.2f+ j%.2f\,\Omega$' % (self.resis*self.z0, self.z0*self.react),
-                            xy = (-0.95, 0.95), 
-                            xytext = (-0.95, 0.95),
+                            xy = (x0, y0), 
+                            xytext = (x0, y0),
                             textcoords = 'offset points',
                             ha = 'left',
                             va = 'center'); 
