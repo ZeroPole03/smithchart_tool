@@ -168,7 +168,7 @@ It receives:
 
 * `Z0`: characteristic impedance of the transmission line.
 * `Impedance`: input impedance object.
-* `deg`: electrical length of the transmission line.
+* `deg`: electrical length of the transmission line in degrees.
 * `f0`: operating frequency.
 
 For example:
@@ -181,7 +181,7 @@ Z1 = Impedance(50.0, 70.561 + 1j*5.052)
 TL1 = TransmissionLine(
     82.0,
     Z1,
-    np.deg2rad(71.39),
+    71.39,
     f0
 )
 ```
@@ -199,7 +199,7 @@ TL1.getImpedance()
 TL1.getAdmitance()
 ```
 
-The corresponding impedance circles can also be plotted:
+The corresponding transformed impedance circles can also be plotted:
 
 ```python
 TL1.plotImpedanceCircles(theta, "Transmission Line")
