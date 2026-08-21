@@ -100,18 +100,18 @@ class Admittance:
         print("Fasor: ", f'{np.abs(self.yin):.3f}', " < ", f'{np.angle(self.yin, deg = True):.3f}');
 
 
-    def labelOnChart(self, band = 'True'):
+    def labelOnChart(self, band = 'True', x0 = -0.95, y0 = 0.75):
         if(self.b < 0):
             plt.annotate(r'$Y_{L}= %.2f - j%.2f\,\Omega$' % (self.g / self.z0, -1*self.b / self.z0),
-                        xy = (-0.95, 0.75), 
-                        xytext = (-0.95, 0.75),
+                        xy = (x0, y0), 
+                        xytext = (x0, y0),
                         textcoords = 'offset points',
                         ha = 'left',
                         va = 'center');
         else:
             plt.annotate(r'$Y_{L}= %.2f+ j%.2f\,\Omega$' % (self.g / self.z0, self.b / self.z0),
-                        xy = (-0.95, 0.75), 
-                        xytext = (-0.95, 0.75),
+                        xy = (x0, y0), 
+                        xytext = (x0, y0),
                         textcoords = 'offset points',
                         ha = 'left',
                         va = 'center'); 
