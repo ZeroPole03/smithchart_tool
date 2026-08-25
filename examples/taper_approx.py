@@ -38,7 +38,6 @@ impNew = 0;
 
 # Linear Taper section approximation thorough TLines junction
 
-
 for k in range(1, N):
 	dZ = k * 100/N;
 	Z0k = 150 - dZ;
@@ -49,7 +48,7 @@ for k in range(1, N):
 
 TLk.labelOnChart(True, 0.1, 0.15);
 Zk.plotCircles(theta);
-
+TLk.printImpedance();
 
 
 

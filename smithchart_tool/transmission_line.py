@@ -116,7 +116,7 @@ class TransmissionLine:
     def printImpedance(self):
         print("------------------------------------------------------------");
         print('Impedancia normalizada de entrada calculada: ')
-        print('Z_in = ',f'{(self.rin + 1j*self.xin):.3f}','Ohms')
+        print('Z_in = ',f'{(50 * self.rin + 1j*50*self.xin):.3f}','Ohms')
         print('Z_in = ', f'{np.abs(self.rin + 1j*self.xin):.3f}', '<' , f'{np.angle(self.rin + 1j*self.xin, deg = True):.3f}');
 
     def printGamma(self):
