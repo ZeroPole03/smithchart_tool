@@ -15,6 +15,9 @@ plt.rcParams.update({
     "ytick.labelsize": 16,     # Números en el eje Y
     "legend.fontsize": 16,     # Tamaño de las leyendas
 })
+# window color setup
+plt.rcParams['figure.facecolor'] = '#b3b3b3ff'
+plt.rcParams['axes.facecolor'] = '#f4f4f4ff'
 
 plt.figure(figsize = (8, 8));
 theta = np.linspace(0, 2*np.pi, 1000);
