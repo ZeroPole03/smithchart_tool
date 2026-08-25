@@ -1,34 +1,70 @@
 # smithchart_tool
 
-A Python library for Smith Chart visualization and microwave impedance transformations based on Möbius transformations.
+A Python library for Smith Chart analysis, microwave impedance transformations, and matching-network synthesis using Möbius transformations.
 
 ## Overview
 
-`smithchart_tool` is a Python package for the analysis and visualization of microwave impedance and admittance transformations on the Smith Chart.
+`smithchart_tool` is an open-source Python package for analyzing and visualizing microwave impedance and admittance transformations on the Smith Chart.
 
-The library provides an object-oriented representation of common microwave network elements, including impedances, admittances, transmission lines, and open-circuit stubs. These elements can be connected sequentially to reproduce the impedance transformations involved in matching-network synthesis and visualize their trajectories on the Smith Chart.
+The library provides an object-oriented framework for representing common microwave network elements such as impedances, admittances, transmission lines, and open-circuit stubs.
 
-The package was developed as an independent computational framework for the verification of matching-network synthesis performed using conventional microwave CAD tools.
+Network elements can be connected sequentially to reproduce the impedance transformations of a matching network and visualize the corresponding trajectories directly on the Smith Chart.
+
+The mathematical transformations implemented by the library are based on complex-number operations and Möbius transformations, providing an explicit computational representation of the transformations commonly performed by microwave CAD tools.
+
+The project was originally developed as a computational framework for independently verifying matching-network synthesis performed using conventional microwave CAD software, particularly Keysight ADS.
+
+## Features
+
+- Smith Chart impedance and admittance visualization.
+- Complex impedance and admittance representation.
+- Reflection-coefficient visualization.
+- Constant-resistance and constant-reactance circles.
+- Constant-conductance and constant-susceptance circles.
+- Transmission-line impedance transformations.
+- Open-circuit stub transformations.
+- Sequential connection of microwave network elements.
+- Visualization of impedance trajectories between matching-network stages.
+- Retrieval of impedance and admittance at each transformation stage.
+- Object-oriented representation of microwave network elements.
+- Independent reproduction of Smith Chart impedance transformations.
+- Möbius transformation-based impedance mapping.
+- Python-based numerical analysis and visualization.
+
+## Supported Network Elements
+
+The package currently provides classes for several microwave network elements, including:
+
+- Impedance
+- Admittance
+- Transmission lines
+- Open-circuit stubs
+- Working on Shor-circuit stub class
+
+These elements can be combined to construct and analyze matching networks step by step.
+
+For example, a network can be represented conceptually as:
+
+```text
+Load
+  │
+  ▼
+Transmission Line
+  │
+  ▼
+Shunt Stub
+  │
+  ▼
+Transmission Line
+  │
+  ▼
+Input Impedance
+```
 
 The implementation was developed as part of the research presented in:
 
 > **Design and Verification of a 500-W S-Band GaN Power Amplifier Using Möbius Transformations**
 
-## Features
-
-* Smith Chart impedance and admittance visualization.
-* Complex impedance and admittance representation.
-* Reflection-coefficient visualization.
-* Constant-resistance and constant-reactance circles.
-* Constant-conductance and constant-susceptance circles.
-* Transmission-line impedance transformations.
-* Open-circuit stub transformations.
-* Sequential connection of microwave network elements.
-* Visualization of impedance trajectories between matching-network stages.
-* Retrieval of impedance and admittance at each transformation stage.
-* Object-oriented representation of microwave network elements.
-* Independent reproduction of Smith Chart impedance transformations.
-* Mathematical formulation of impedance transformations using Möbius transformations.
 
 ## Installation
 
