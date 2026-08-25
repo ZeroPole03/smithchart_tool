@@ -16,17 +16,40 @@ plt.rcParams.update({
     "legend.fontsize": 16,     # Tamaño de las leyendas
 })
 plt.rcParams['figure.facecolor'] = '#b3b3b3ff'
-#plt.rcParams['axes.facecolor'] = '#181818'
+plt.rcParams['axes.facecolor'] = '#f4f4f4ff'
 
 plt.figure(figsize = (8, 8));
 theta = np.linspace(0, 2*np.pi, 1000);
 smith = SmithChart(theta, unitary = False);
 smith.plotChart(admitance = False); cadena = r'';
 
+
+# Taper length: 180°
+N = 80;
+length = 177;
+dtheta = length/N;
+# Initial conditions 
+f0 = 3e9;
 Z0 = 50;
-Z1 = Impedance(Z0, 150 + 1j*50);
-Z1.addToSmithChart(cadena);
-Z1.plotCircles(theta);
+Zk = Impedance(Z0, 150 + 1j*50);
+Zk.addToSmithChart(cadena);
+Zk.plotCircles(theta);
+impNew = 0;
+
+# Linear Taper section approximation thorough TLines junction
+
+
+for k in range(1, N):
+	dZ = k * 100/N;
+	Z0k = 150 - dZ;
+	TLk = TransmissionLine(Z0k, Zk, dtheta, f0);
+	TLk.addToSmithChart(theta, cadena);
+	impNew = TLk.getImpedance();
+	Zk = Impedance(Z0, impNew);
+
+TLk.labelOnChart(True, 0.1, 0.15);
+Zk.plotCircles(theta);
+
 
 
 
