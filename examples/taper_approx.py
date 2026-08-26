@@ -36,7 +36,7 @@ Zk.addToSmithChart(cadena);
 Zk.plotCircles(theta);
 impNew = 0;
 
-# Linear Taper section approximation thorough TLines junction
+# Linear Taper section approximation through TLines junction
 
 for k in range(1, N):
 	dZ = k * 100/N;
