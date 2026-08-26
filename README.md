@@ -39,7 +39,7 @@ The package currently provides classes for several microwave network elements, i
 - Admittance
 - Transmission lines
 - Open-circuit stubs
-- Working on Shor-circuit stub class
+- Working on Short-circuit stub class
 
 These elements can be combined to construct and analyze matching networks step by step.
 
