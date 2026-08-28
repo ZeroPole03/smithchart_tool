@@ -33,7 +33,7 @@ Zk.plotCircles(theta);
 impNew = 0;
 
 # Exponential Taper section approximation through TLines junction
-for k in range(1, N):
+for k in range(N):
     x = k / (N - 1);
     Z0k = 150 * (50 / 150)**x;
     TLk = TransmissionLine(Z0k, Zk, dtheta, f0);

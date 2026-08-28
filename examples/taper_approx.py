@@ -38,7 +38,7 @@ impNew = 0;
 
 # Linear Taper section approximation through TLines junction
 
-for k in range(1, N):
+for k in range(N):
 	dZ = k * 100/(N - 1);
 	Z0k = 150 - dZ;
 	TLk = TransmissionLine(Z0k, Zk, dtheta, f0);
