@@ -14,7 +14,7 @@ class SmithChart:
         self.theta = theta; self.unit = unitary;
 
 
-    def plotAdmitance(self, radio = 1, radio1 = 1, h = 0):
+    def plotAdmittance(self, radio = 1, radio1 = 1, h = 0):
         x3 = radio * np.cos(self.theta) - h;
         y3 = radio * np.sin(self.theta);
         x4 = radio1 * np.cos(self.theta) - 1;
@@ -26,7 +26,7 @@ class SmithChart:
 
 
 
-    def plotChart(self, admitance = False):
+    def plotChart(self, admittance = False):
         if (self.unit):
             x = np.cos(self.theta);
             y = np.sin(self.theta);
@@ -45,7 +45,7 @@ class SmithChart:
                 plt.plot(x, y, color = 'gray', lw = 0.5);
                 plt.plot(x1, y1, color = 'gray', lw = 0.5);
                 plt.plot(x1, y2, color = 'gray', lw = 0.5);
-                if (admitance):
-                    self.plotAdmitance(radio, radio1, h);
+                if (admittance):
+                    self.plotAdmittance(radio, radio1, h);
 
  

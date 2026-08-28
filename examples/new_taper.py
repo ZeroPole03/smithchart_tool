@@ -1,9 +1,5 @@
-# Electronics Engineer: Science Faculty
-# Universidad Autónoma de San Luis Potosí
-# Alan Rodríguez Bojorjes, SLP, México
-# 2026
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 from smithchart_tool import *
 
 plt.rcParams.update({
@@ -18,37 +14,38 @@ plt.rcParams.update({
 plt.rcParams['figure.facecolor'] = '#b3b3b3ff'
 plt.rcParams['axes.facecolor'] = '#f4f4f4ff'
 
+# We plot the Chart First
 plt.figure(figsize = (8, 8));
 theta = np.linspace(0, 2*np.pi, 1000);
-smith = SmithChart(theta, unitary = False);
-smith.plotChart(admittance = False); cadena = r'';
+Chart = SmithChart(theta, unitary = False); cadena = r'';
+Chart.plotChart(admittance = False);
 
 
 # Taper length: 180°
 N = 80;
-length = 177;
-dtheta = length/N;
-# Initial conditions 
-f0 = 3e9;
-Z0 = 50;
+length = 185;
+dtheta = length / N;
+
+# Initial conditions
+f0 = 3e9; Z0 = 50;
 Zk = Impedance(Z0, 150 + 1j*50);
 Zk.addToSmithChart(cadena);
 Zk.plotCircles(theta);
 impNew = 0;
 
-# Linear Taper section approximation through TLines junction
+# Exponential Taper section approximation through TLines junction
 
 for k in range(1, N):
-	dZ = k * 100/N;
-	Z0k = 150 - dZ;
-	TLk = TransmissionLine(Z0k, Zk, dtheta, f0);
-	TLk.addToSmithChart(theta, cadena);
-	impNew = TLk.getImpedance();
-	Zk = Impedance(Z0, impNew);
+    x = k / N;
+    Z0k = 150 * (50 / 150)**x;
+    TLk = TransmissionLine(Z0k, Zk, dtheta, f0);
+    TLk.addToSmithChart(theta, cadena);
+    impNew = TLk.getImpedance();
+    Zk = Impedance(Z0, impNew);
 
-TLk.labelOnChart(True, 0.1, 0.15);
-Zk.plotCircles(theta);
-TLk.printImpedance();
+TLk.labelOnChart(True, 0.1, 0.15)
+Zk.plotCircles(theta)
+TLk.printImpedance()
 
 
 

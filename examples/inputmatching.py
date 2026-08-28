@@ -22,7 +22,7 @@ plt.rcParams['axes.facecolor'] = '#f4f4f4ff'
 plt.figure(figsize = (8, 8));
 theta = np.linspace(0, 2*np.pi, 1000);
 smith = SmithChart(theta, unitary = False);
-smith.plotChart(admitance = False); cadena = r'';
+smith.plotChart(admittance = False); cadena = r'';
 f0=3e9; Xc = -1j/(2*np.pi*f0*9.9999e-12);
 
 # Interconexión de los componentes de la red
