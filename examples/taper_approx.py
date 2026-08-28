@@ -46,8 +46,8 @@ for k in range(N):
     impNew = TLk.getImpedance();
     Zk = Impedance(Z0, impNew);
 
-#TLk.labelOnChart(True, 0.1, 0.15);
-#Zk.plotCircles(theta);
+TLk.labelOnChart(True, 0.1, 0.15);
+Zk.plotCircles(theta);
 print("For", N,  "midpoint Sections we obatain: ");
 TLk.printImpedance();
 
