@@ -25,29 +25,30 @@ smith.plotChart(admittance = False); cadena = r'';
 
 
 # Taper length: 180°
-N = 80;
-length = 177;
+N = 100;
+length = 180;
 dtheta = length/N;
 # Initial conditions 
 f0 = 3e9;
 Z0 = 50;
 Zk = Impedance(Z0, 150 + 1j*50);
-Zk.addToSmithChart(cadena);
-Zk.plotCircles(theta);
+#Zk.addToSmithChart(cadena);
+#Zk.plotCircles(theta);
 impNew = 0;
 
 # Linear Taper section approximation through TLines junction
 
 for k in range(N):
-    x = k / (N - 1);
+    x = (k + 0.5) / N;
     Z0k = 150 + (50 - 150) * x;
     TLk = TransmissionLine(Z0k, Zk, dtheta, f0);
     TLk.addToSmithChart(theta, cadena);
     impNew = TLk.getImpedance();
     Zk = Impedance(Z0, impNew);
 
-TLk.labelOnChart(True, 0.1, 0.15);
-Zk.plotCircles(theta);
+#TLk.labelOnChart(True, 0.1, 0.15);
+#Zk.plotCircles(theta);
+print("For", N,  "midpoint Sections we obatain: ");
 TLk.printImpedance();
 
 
