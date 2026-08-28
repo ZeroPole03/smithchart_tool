@@ -26,7 +26,7 @@ smith.plotChart(admittance = False); cadena = r'';
 
 # Taper length: 180°
 N = 80;
-length = 178.15;
+length = 177;
 dtheta = length/N;
 # Initial conditions 
 f0 = 3e9;
@@ -39,12 +39,12 @@ impNew = 0;
 # Linear Taper section approximation through TLines junction
 
 for k in range(N):
-    x = k / (N - 1)
-    Z0k = 150 + (50 - 150) * x
-	TLk = TransmissionLine(Z0k, Zk, dtheta, f0);
-	TLk.addToSmithChart(theta, cadena);
-	impNew = TLk.getImpedance();
-	Zk = Impedance(Z0, impNew);
+    x = k / (N - 1);
+    Z0k = 150 + (50 - 150) * x;
+    TLk = TransmissionLine(Z0k, Zk, dtheta, f0);
+    TLk.addToSmithChart(theta, cadena);
+    impNew = TLk.getImpedance();
+    Zk = Impedance(Z0, impNew);
 
 TLk.labelOnChart(True, 0.1, 0.15);
 Zk.plotCircles(theta);
