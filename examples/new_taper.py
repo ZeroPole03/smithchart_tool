@@ -20,7 +20,6 @@ theta = np.linspace(0, 2*np.pi, 1000);
 Chart = SmithChart(theta, unitary = False); cadena = r'';
 Chart.plotChart(admittance = False);
 
-
 # Taper length: 180°
 N = 80;
 length = 185;
@@ -34,9 +33,8 @@ Zk.plotCircles(theta);
 impNew = 0;
 
 # Exponential Taper section approximation through TLines junction
-
 for k in range(1, N):
-    x = k / N;
+    x = k / (N - 1);
     Z0k = 150 * (50 / 150)**x;
     TLk = TransmissionLine(Z0k, Zk, dtheta, f0);
     TLk.addToSmithChart(theta, cadena);
