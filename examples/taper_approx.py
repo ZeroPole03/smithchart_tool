@@ -39,8 +39,8 @@ impNew = 0;
 # Linear Taper section approximation through TLines junction
 
 for k in range(N):
-	dZ = k * 100/(N - 1);
-	Z0k = 150 - dZ;
+    x = k / (N - 1)
+    Z0k = 150 + (50 - 150) * x
 	TLk = TransmissionLine(Z0k, Zk, dtheta, f0);
 	TLk.addToSmithChart(theta, cadena);
 	impNew = TLk.getImpedance();
