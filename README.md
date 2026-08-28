@@ -389,6 +389,7 @@ Example scripts are provided in the `examples/` directory:
 examples/
 ├── inputmatching.py
 └── outputmatching.py
+└── taper_approx.py
 ```
 
 These scripts demonstrate the use of transmission lines, reactive elements, open stubs, and Smith Chart visualization for matching-network analysis.
