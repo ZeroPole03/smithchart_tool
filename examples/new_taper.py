@@ -21,13 +21,13 @@ Chart = SmithChart(theta, unitary = False); cadena = r'';
 Chart.plotChart(admittance = False);
 
 # Taper length: 180°
-N = 80;
-length = 185;
+N = 100;
+length = 183;
 dtheta = length / N;
 
 # Initial conditions
 f0 = 3e9; Z0 = 50;
-Zk = Impedance(Z0, 150 + 1j*50);
+Zk = Impedance(Z0, 150);
 Zk.addToSmithChart(cadena);
 Zk.plotCircles(theta);
 impNew = 0;

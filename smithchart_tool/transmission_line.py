@@ -67,15 +67,21 @@ class TransmissionLine:
         self.xin = 2 * self.giin / ((1 - self.ginr)**2 + self.giin**2);
         self.Zin = self.rin + 1j*self.xin;
         self.Zin *= 50.0;
-        # creamos los círculos reactivos y resistivos de entrada
-        xr = (1/(self.rin + 1)) * np.cos(theta) + self.rin/(self.rin + 1);
-        yr = (1/(self.rin + 1)) * np.sin(theta);
-        yi = (1/self.xin) * (np.cos(theta) + 1);
-        xi = (1/self.xin) * np.sin(theta) + 1;
-        # Círculo resistivo de impedancia de entrada
-        plt.plot(xr, yr, color = color1, lw = 2);
-        # Círculo reactivo de impedancia de entrada
-        plt.plot(xi, yi, color = color2, lw = 2);
+        if self.xin > 0.0:
+            # creamos los círculos reactivos y resistivos de entrada
+            yi = (1/self.xin) * (np.cos(theta) + 1);
+            xi = (1/self.xin) * np.sin(theta) + 1;
+            # Círculo resistivo de impedancia de entrada
+            plt.plot(xr, yr, color = color1, lw = 2);
+            # Círculo reactivo de impedancia de entrada
+            plt.plot(xi, yi, color = color2, lw = 2);
+        elif self.xin == 0:
+            xr = (1/(self.rin + 1)) * np.cos(theta) + self.rin/(self.rin + 1);
+            yr = (1/(self.rin + 1)) * np.sin(theta);
+            plt.plot(xr, yr, color = color1, lw = 2);
+        else:
+            pass;
+
 
     def labelOnChart(self, band, x0 = -0.95, y0 = 0.85):
         if(band):

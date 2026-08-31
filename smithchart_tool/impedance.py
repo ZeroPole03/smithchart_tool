@@ -120,7 +120,7 @@ class Impedance:
                     label = self.cadena);   
 
     def plotCircles(self, theta, color1 = 'black', color2 = 'black'):
-        if(self.react == 0):
+        if(self.react < 1e-6):
             # Radios de círculos de ZL
             radio2 = 1/(self.resis + 1);
             # Resistiva de entrada 
@@ -128,7 +128,6 @@ class Impedance:
             y3 = radio2 * np.sin(theta);
             # Círculo resistivo de entrada
             plt.plot(x3, y3, color = color1, lw = 2);
-            # Círculo reactivo de entrada
         else:
             # Radios de círculos de ZL
             radio2 = 1/(self.resis + 1);
@@ -143,7 +142,6 @@ class Impedance:
             plt.plot(x3, y3, color = color1, lw = 2);
             # Círculo reactivo de entrada
             plt.plot(x4, y4, color = color2, lw = 2);
-            # Intersección de cículos de entrada
 
 
     def printSWR(self):
