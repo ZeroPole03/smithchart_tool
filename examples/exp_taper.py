@@ -22,7 +22,7 @@ Chart.plotChart(admittance = False);
 
 # Taper length: 180°
 N = 100;
-length = 183;
+length = 183
 dtheta = length / N;
 
 # Initial conditions
@@ -43,7 +43,7 @@ for k in range(N):
 
 
 TLk.labelOnChart(True, 0.1, 0.15)
-Zk.plotCircles(theta)
+Zk.plotCircles(theta);
 print("For ", N,  "Section we obatain: ");
 TLk.printImpedance()
 

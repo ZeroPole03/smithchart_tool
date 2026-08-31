@@ -71,6 +71,8 @@ class TransmissionLine:
             # creamos los círculos reactivos y resistivos de entrada
             yi = (1/self.xin) * (np.cos(theta) + 1);
             xi = (1/self.xin) * np.sin(theta) + 1;
+            xr = (1/(self.rin + 1)) * np.cos(theta) + self.rin/(self.rin + 1);
+            yr = (1/(self.rin + 1)) * np.sin(theta);
             # Círculo resistivo de impedancia de entrada
             plt.plot(xr, yr, color = color1, lw = 2);
             # Círculo reactivo de impedancia de entrada
