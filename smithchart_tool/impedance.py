@@ -126,7 +126,7 @@ class Impedance:
             y3 = radio2 * np.sin(theta);
             # Círculo resistivo de entrada
             plt.plot(x3, y3, color = color1, lw = 2);
-        else:
+        elif(self.react > 1e-3):
             # Radios de círculos de ZL
             radio2 = 1/(self.resis + 1);
             radio3 = 1/self.react;
@@ -140,6 +140,9 @@ class Impedance:
             plt.plot(x3, y3, color = color1, lw = 2);
             # Círculo reactivo de entrada
             plt.plot(x4, y4, color = color2, lw = 2);
+        else:
+            pass;
+        
 
 
     def printSWR(self):
