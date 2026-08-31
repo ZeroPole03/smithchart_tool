@@ -34,7 +34,7 @@ impNew = 0;
 
 # Exponential Taper section approximation through TLines junction
 for k in range(N):
-    x = (k + 0.5)/N;
+    x = (k + 0.25)/N;
     Z0k = 150 * (50 / 150)**x;
     TLk = TransmissionLine(Z0k, Zk, dtheta, f0);
     TLk.addToSmithChart(theta, cadena);

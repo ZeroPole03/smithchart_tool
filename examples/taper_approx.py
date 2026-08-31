@@ -26,18 +26,17 @@ smith.plotChart(admittance = False); cadena = r'';
 
 # Taper length: 180°
 N = 100;
-length = 172;
+length = 180;
 dtheta = length/N;
 # Initial conditions 
 f0 = 3e9;
 Z0 = 50;
-Zk = Impedance(Z0, 150 + 1j*75);
+Zk = Impedance(Z0, 150 + 1j*50);
 #Zk.addToSmithChart(cadena);
 #Zk.plotCircles(theta);
 impNew = 0;
 
 # Linear Taper section approximation through TLines junction
-
 for k in range(N):
     x = (k + 0.5) / N;
     Z0k = 150 + (50 - 150) * x;

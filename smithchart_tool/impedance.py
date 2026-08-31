@@ -2,8 +2,6 @@
 # Universidad Autónoma de San Luis Potosí
 # Alan Rodríguez Bojorjes, SLP, México
 # 2026
-
-
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -120,7 +118,7 @@ class Impedance:
                     label = self.cadena);   
 
     def plotCircles(self, theta, color1 = 'black', color2 = 'black'):
-        if(self.react < 1e-6):
+        if(self.react < 1e-4):
             # Radios de círculos de ZL
             radio2 = 1/(self.resis + 1);
             # Resistiva de entrada 
