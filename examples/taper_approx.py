@@ -31,7 +31,7 @@ dtheta = length/N;
 # Initial conditions 
 f0 = 3e9;
 Z0 = 50;
-Zk = Impedance(Z0, 150 + 1j*50);
+Zk = Impedance(Z0, 150);
 #Zk.addToSmithChart(cadena);
 #Zk.plotCircles(theta);
 impNew = 0;
