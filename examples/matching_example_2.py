@@ -11,6 +11,9 @@ plt.rcParams.update({
     "ytick.labelsize": 16,     # Números en el eje Y
     "legend.fontsize": 16,     # Tamaño de las leyendas
 })
+# Window plot parameters
+plt.rcParams['figure.facecolor'] = '#b3b3b3ff';
+plt.rcParams['axes.facecolor'] = '#f4f4f4ff';
 
 # We plot the Chart First
 plt.figure(figsize = (8, 8));
