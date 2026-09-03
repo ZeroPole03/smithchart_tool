@@ -56,7 +56,7 @@ class OpenStub:
 
     ###########################################################
 
-    def getAdmitance(self):
+    def getAdmittance(self):
         return self.Yin
 
     ###########################################################
@@ -71,7 +71,7 @@ class OpenStub:
 
     ###########################################################
 
-    def getLoadAdmitance(self):
+    def getLoadAdmittance(self):
         return self.Yload
 
     ###########################################################
@@ -171,9 +171,7 @@ class OpenStub:
             yB = radioB*(np.sin(theta) - 1);
             plt.plot(xB, yB, color=colorB, lw=2);
     ###########################################################
-    def labelOnChart(self, band=True, x0 = -0.95, y0 = 0.95):
-        if not band:
-            return
+    def labelOnChart(self, x0 = -0.95, y0 = 0.9):
         # Impedancia equivalente
         if np.imag(self.Zin) < 0:
             plt.annotate(
@@ -213,7 +211,7 @@ class OpenStub:
                 xytext=(x0, y0 - 0.13),
                 textcoords='offset points',
                 ha='left');
-        # Información del stub
+        #Información del stub
         if np.imag(self.Zstub) < 0:
 
             texto = r'$Z_{stub}=%.2f-j%.2f\,\Omega$' % (
@@ -237,8 +235,8 @@ class OpenStub:
             r'$|\Gamma|=%.3f\angle%.2f^\circ$'
             %(self.mag,
               np.angle(self.gamma,deg=True)),
-            xy=(x0, y0 - 1.9),
-            xytext=(x0, y0 - 1.9),
+            xy=(x0, y0 - 1.8),
+            xytext=(x0, y0 - 1.8),
             textcoords='offset points',
             ha='left');
 

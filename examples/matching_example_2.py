@@ -15,10 +15,11 @@ plt.rcParams.update({
 # We plot the Chart First
 plt.figure(figsize = (8, 8));
 theta = np.linspace(0, 2*np.pi, 1000);
-Chart = SmithChart(theta, unitary = False); cadena = r'';
+Chart = SmithChart(theta, unitary = True); cadena = r'';
 Chart.plotChart(admittance = False); f0 = 3.0e9;
 length = 0.081*360.0;
-Z0 = 50.0;
+Z0 = 50.0; L = 4.05e-9;
+Xl = 1j*2*np.pi*f0*L;
 
 imp = 150 + 1j*50;
 ZL = Impedance(Z0, imp);
@@ -26,8 +27,21 @@ YL = Admittance(Z0, ZL);
 YL.addToSmithChart(theta);
 ZL.addToSmithChart(cadena);
 ZL.plotCircles(theta);
+#ZL.labelOnChart(True);
+stub = OpenStub(50, imp, length, f0);
+stub.addToSmithChart(cadena);
+stub.labelOnChart();
+imp2 = stub.getImpedance(); 
+imp2 += Xl;
 
-# Configuración de la ventana del plot
+ZL2 = Impedance(Z0, imp2);
+ZL2.addToSmithChart(cadena);
+ZL2.plotCircles(theta);
+print(Xl);
+
+
+
+# Plotting window configuration
 plt.ylabel(r'$Im\{\Gamma\}$');
 plt.xlabel(r'$Re\{\Gamma\}$');
 plt.xlim(-1, 1);
@@ -39,4 +53,4 @@ ax1 = plt.gca()      # eje actual
 plt.legend();
 #plt.grid();
 plt.gca().set_aspect('equal');
-plt.show();
+plt.show()
