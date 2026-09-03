@@ -31,6 +31,7 @@ ZL.plotCircles(theta);
 #ZL.labelOnChart(True);
 stub = OpenStub(50, imp, length, f0);
 stub.addToSmithChart(cadena);
+stub.plotImpedanceCircles(theta);
 #stub.labelOnChart();
 # Adding series inductor to complete matching
 imp2 = stub.getImpedance(); 
