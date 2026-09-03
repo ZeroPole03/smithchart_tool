@@ -16,11 +16,12 @@ plt.rcParams.update({
 plt.figure(figsize = (8, 8));
 theta = np.linspace(0, 2*np.pi, 1000);
 Chart = SmithChart(theta, unitary = True); cadena = r'';
-Chart.plotChart(admittance = False); f0 = 3.0e9;
+Chart.plotChart(admittance = False); f0 = 3e9;
 length = 0.081*360.0;
-Z0 = 50.0; L = 4.05e-9;
+Z0 = 50.0; L = 4.054e-9;
 Xl = 1j*2*np.pi*f0*L;
 
+# We define our load impedance
 imp = 150 + 1j*50;
 ZL = Impedance(Z0, imp);
 YL = Admittance(Z0, ZL);
@@ -30,15 +31,15 @@ ZL.plotCircles(theta);
 #ZL.labelOnChart(True);
 stub = OpenStub(50, imp, length, f0);
 stub.addToSmithChart(cadena);
-stub.labelOnChart();
+#stub.labelOnChart();
+# Adding series inductor to complete matching
 imp2 = stub.getImpedance(); 
 imp2 += Xl;
-
+#Showing new Impedance in the SmithChart
 ZL2 = Impedance(Z0, imp2);
 ZL2.addToSmithChart(cadena);
 ZL2.plotCircles(theta);
-print(Xl);
-
+ZL2.labelOnChart(True);
 
 
 # Plotting window configuration
