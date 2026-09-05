@@ -39,7 +39,7 @@ The package currently provides classes for several microwave network elements, i
 - Admittance
 - Transmission lines
 - Open-circuit stubs
-- Working on Short-circuit stub class
+- Short-circuit stubs
 
 These elements can be combined to construct and analyze matching networks step by step.
 
@@ -100,6 +100,7 @@ The main classes included in the package are:
 | `Admittance`       | Represents the admittance associated with an impedance.                |
 | `TransmissionLine` | Represents impedance transformations produced by transmission lines.   |
 | `OpenStub`         | Represents impedance transformations produced by an open-circuit stub. |
+| `ShortStub`         | Represents impedance transformations produced by an short-circuit stub. |
 
 The classes can be imported directly from the main package:
 
@@ -292,6 +293,53 @@ and the corresponding admittance circles using:
 
 ```python
 stub.plotAdmitanceCircles(theta)
+```
+
+##Short-Circuit Stub
+
+The `ShortStub` class represents a short-circuit transmission-line stub and its associated impedance transformation.
+
+The constructor accepts:
+
+* `z0`: characteristic impedance of the stub.
+* `ZL`: input impedance associated with the previous network stage.
+* `theta_deg`: electrical length of the stub in degrees.
+* `f0`: operating frequency.
+
+For example:
+
+```python
+shortstub = ShortStub(
+    z0=77.0,
+    ZL=50 + 1j*10,
+    theta_deg=11.99,
+    f0=2.4e9
+)
+```
+
+The transformed reflection coefficient can be represented on the Smith Chart:
+
+```python
+shortstub.addToSmithChart("Open Stub")
+```
+
+The transformed impedance and admittance can be obtained using:
+
+```python
+shortstub.getImpedance()
+shortstub.getAdmitance()
+```
+
+The associated impedance circles can be plotted using:
+
+```python
+shortstub.plotImpedanceCircles(theta)
+```
+
+and the corresponding admittance circles using:
+
+```python
+shortstub.plotAdmitanceCircles(theta)
 ```
 
 ## Sequential Matching-Network Analysis
