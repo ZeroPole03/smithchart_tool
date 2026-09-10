@@ -11,8 +11,8 @@ plt.rcParams.update({
     "ytick.labelsize": 16,     # Números en el eje Y
     "legend.fontsize": 16,     # Tamaño de las leyendas
 })
-plt.rcParams['figure.facecolor'] = '#b3b3b3ff'
-plt.rcParams['axes.facecolor'] = '#f4f4f4ff'
+#plt.rcParams['figure.facecolor'] = '#b3b3b3ff'
+#plt.rcParams['axes.facecolor'] = '#f4f4f4ff'
 
 # We plot the Chart First
 plt.figure(figsize = (8, 8));
@@ -34,7 +34,7 @@ impNew = 0;
 
 # Exponential Taper section approximation through TLines junction
 for k in range(N):
-    x = (k + 0.25)/N;
+    x = (k + 0.5)/N;
     Z0k = 150 * (50 / 150)**x;
     TLk = TransmissionLine(Z0k, Zk, dtheta, f0);
     TLk.addToSmithChart(theta, cadena);
