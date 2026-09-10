@@ -15,38 +15,14 @@ plt.rcParams.update({
     "legend.fontsize": 16,
 })
 
-er = 3.48              # Permitividad relativa RO4350B
+er = 3.66              # Permitividad relativa RO4350B
 h = 0.762e-3           # Altura del sustrato [m]
-t = 35e-6              # Espesor del cobre [m]
+t = 18e-6              # Espesor del cobre [m]
 f0 = 3e9               # Frecuencia central [Hz]
 # Resistividad aproximada del cobre
 rho_cu = 1.68e-8       # Ohm*m
 # FUNCIÓN: IMPEDANCIA DE UNA MICROSTRIP
 def microstrip_z0(width, h, t, er, f0):
-    """
-    Calcula la impedancia característica de una microstrip
-    utilizando scikit-rf / Hammerstad-Jensen.
-
-    Parameters
-    ----------
-    width : float
-        Ancho de la pista [m]
-    h : float
-        Altura del sustrato [m]
-    t : float
-        Espesor del cobre [m]
-    er : float
-        Permitividad relativa
-    f0 : float
-        Frecuencia [Hz]
-
-    Returns
-    -------
-    z0 : float
-        Impedancia característica [Ohm]
-    ep_eff : float
-        Permitividad efectiva
-    """
     freq = Frequency(f0 / 1e9,f0 / 1e9,1,unit='GHz');
     line = MLine(frequency=freq,z0_port=50,w=width,
         h=h,
@@ -76,31 +52,19 @@ def synthesize_width(
     Encuentra el ancho W de una microstrip que produzca
     aproximadamente Z_target utilizando Hammerstad-Jensen
     mediante búsqueda binaria.
-
     tolerance:
         Error relativo permitido.
     """
-
     if w_min is None:
-        w_min = h * 1e-3
+        w_min = h * 1e-3;
 
     if w_max is None:
-        w_max = h * 100.0
-
+        w_max = h * 100.0;
     # Calculamos impedancias en los extremos
-
-    Z_min, _ = microstrip_z0(
-        w_max, h, t, er, f0
-    )
-
-    Z_max, _ = microstrip_z0(
-        w_min, h, t, er, f0
-    )
-
+    Z_min, _ = microstrip_z0(w_max, h, t, er, f0);
+    Z_max, _ = microstrip_z0(w_min, h, t, er, f0);
     # Comprobamos que el objetivo está dentro del rango
-
     if not (Z_min <= Z_target <= Z_max):
-
         raise ValueError(
             f"Z_target = {Z_target:.3f} Ohm está fuera "
             f"del rango sintetizable.\n"
@@ -135,9 +99,7 @@ def electrical_length_to_physical(
     """
     Convierte longitud eléctrica theta [deg]
     a longitud física [m].
-
     theta = beta * L
-
     beta = 2*pi*f0*sqrt(ep_eff)/c
     """
 
@@ -164,7 +126,7 @@ dtheta = length / N;
 
 # IMPEDANCIA INICIAL# 
 Z0 = 50
-Z_start = 150
+Z_start = 90
 Z_end = 50
 
 # CARGA INICIAL
@@ -183,7 +145,6 @@ position_sections = [];
 physical_position = 0.0;
 
 # TAPER EXPONENCIAL
-
 for k in range(N):
     x = (k + 0.25) / N
     Z0k = (Z_start *(Z_end / Z_start)**x);
@@ -203,7 +164,6 @@ for k in range(N):
         print(f"Error en sección {k}:");
         print(error);
         raise
-
     # Convertimos la longitud eléctrica
     # de la sección a longitud física
     physical_length = electrical_length_to_physical(dtheta,f0,ep_eff);
@@ -215,8 +175,8 @@ for k in range(N):
     position_sections.append(physical_position);
     physical_position += physical_length;
 
-# RESULTADOS DEL TAPER
 
+# RESULTADOS DEL TAPER
 width_sections = np.array(width_sections);
 length_sections = np.array(length_sections);
 Z_sections = np.array(Z_sections);
@@ -282,33 +242,23 @@ plt.legend();
 plt.gca().set_aspect('equal');
 plt.show();
 
+
 # FIGURA FÍSICA DEL TAPER
-
 fig, ax = plt.subplots(figsize=(14, 4));
-# ------------------------------------------------------------
-# Posición acumulada de cada sección
-# ------------------------------------------------------------
-x_position = np.concatenate(
-    (
-        [0],
-        np.cumsum(length_sections)
-    )
-)
-
-# ------------------------------------------------------------
-# Dibujamos cada sección como un rectángulo
-# ------------------------------------------------------------
-
+# Convertimos metros -> milímetros
+width_mm = width_sections * 1e3;
+length_mm = length_sections * 1e3;
+# Posición acumulada en mm
+x_position_mm = np.concatenate(([0],np.cumsum(length_mm)));
+# Dibujamos cada sección
 for k in range(N):
-    x0 = x_position[k];
-    Lk = length_sections[k];
-    Wk = width_sections[k];
-    # Centramos la geometría respecto al eje Y
-    y0 = -Wk / 2.0;
+    x0 = x_position_mm[k];
+    Lk = length_mm[k];
+    Wk = width_mm[k];
     rectangle = plt.Rectangle(
         (
             x0,
-            y0
+            -Wk / 2
         ),
         Lk,
         Wk,
@@ -318,33 +268,19 @@ for k in range(N):
     )
     ax.add_patch(rectangle);
 
-
-# Eje de referencia
-
+# Eje central
 ax.axhline(0,color='black',linewidth=0.8,linestyle='--');
-
-# Formato
 ax.set_xlabel(r'Physical position $z$ [mm]');
 ax.set_ylabel(r'Width $W$ [mm]');
-
-# Escalamos eje X
-ax.set_xlim(0,np.sum(length_sections));
-# Escalamos eje Y
-max_width = np.max(width_sections);
-ax.set_ylim(-max_width,max_width);
-# Convertimos ticks de metros a mm
-xticks = ax.get_xticks()
-ax.set_xticklabels(
-    [
-        f'{x*1e3:.1f}'
-        for x in xticks
-    ]
-)
-# Título
-ax.set_title(r'Physical approximation of the exponential taper')
-ax.grid(True,alpha=0.25);
+ax.set_xlim(0,np.sum(length_mm));
+max_width_mm = np.max(width_mm);
+ax.set_ylim(-max_width_mm * 0.75,max_width_mm * 0.75);
+ax.set_title(r'Physical approximation of the exponential taper');
+ax.grid(True, alpha=0.25);
 plt.tight_layout();
 plt.show();
+
+
 # PERFIL Z0 VS POSICIÓN
 fig, ax = plt.subplots(figsize=(10, 5));
 # Posición central de cada sección
