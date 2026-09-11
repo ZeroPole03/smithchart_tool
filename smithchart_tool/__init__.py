@@ -9,3 +9,4 @@ from .admittance import Admittance
 from .transmission_line import TransmissionLine
 from .open_stub import OpenStub
 from .short_stub import ShortStub
+from .capacitor import Capacitor

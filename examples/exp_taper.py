@@ -27,7 +27,7 @@ dtheta = length / N;
 
 # Initial conditions
 f0 = 3e9; Z0 = 50;
-Zk = Impedance(Z0, 150);
+Zk = Impedance(Z0, 90);
 Zk.addToSmithChart(cadena);
 Zk.plotCircles(theta);
 impNew = 0;
@@ -35,14 +35,14 @@ impNew = 0;
 # Exponential Taper section approximation through TLines junction
 for k in range(N):
     x = (k + 0.5)/N;
-    Z0k = 150 * (50 / 150)**x;
+    Z0k = 90 * (50 / 90)**x;
     TLk = TransmissionLine(Z0k, Zk, dtheta, f0);
     TLk.addToSmithChart(theta, cadena);
     impNew = TLk.getImpedance();
     Zk = Impedance(Z0, impNew);
 
 
-TLk.labelOnChart(True, 0.1, 0.15)
+TLk.labelOnChart(True, 0.05, 0.05)
 Zk.plotCircles(theta);
 print("For ", N,  "Section we obatain: ");
 TLk.printImpedance()
