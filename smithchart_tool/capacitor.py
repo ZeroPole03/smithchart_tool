@@ -40,7 +40,7 @@ class Capacitor(Impedance):
     def getImpedance(self):
         return self.Zout
 
-    def addToSmithChart(self,theta,cadena="Capacitor",color1="#18156b",color2="#18156b"):
+    def addToSmithChart(self,theta,cadena="",color1="#00d7f3ff"):
         self.cadena = cadena;
         # Parámetro geométrico para recorrer
         # desde la impedancia inicial hasta la final
@@ -52,13 +52,13 @@ class Capacitor(Impedance):
         x = np.real(gamma);
         y = np.imag(gamma);
         # Punto inicial
-        plt.scatter(np.real(self.gammaIn),np.imag(self.gammaIn),color=color1);
+        plt.scatter(np.real(self.gammaIn),np.imag(self.gammaIn),color='black');
         # Punto final
-        plt.scatter(self.gr,self.gi,color=color1);
+        plt.scatter(self.gr,self.gi,color='black');
         # Línea desde el centro hasta el punto final
-        plt.plot([0, self.gr],[0, self.gi],color=color2,label=self.cadena);
+        plt.plot([0, self.gr],[0, self.gi],color='black',label=self.cadena);
         # Arco del capacitor
-        plt.plot(x,y,color=color2,lw=3);
+        plt.plot(x,y,color=color1,lw=3);
 
 
 

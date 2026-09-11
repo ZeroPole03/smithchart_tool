@@ -18,32 +18,51 @@ plt.rcParams['axes.facecolor'] = '#f4f4f4ff';
 # We plot the Chart First
 plt.figure(figsize = (8, 8));
 theta = np.linspace(0, 2*np.pi, 1000);
-Chart = SmithChart(theta, unitary = True); cadena = r'';
+Chart = SmithChart(theta, unitary = False); cadena = r'';
 Chart.plotChart(admittance = False); f0 = 3e9;
 length = 0.081*360.0;
 Z0 = 50.0; L = 4.054e-9;
 Xl = 1j*2*np.pi*f0*L;
 
-# We define our load impedance
 imp = 150 + 1j*50;
-ZL = Impedance(Z0, imp);
-YL = Admittance(Z0, ZL);
-YL.addToSmithChart(theta);
-ZL.addToSmithChart(cadena);
-ZL.plotCircles(theta);
-#ZL.labelOnChart(True);
-stub = OpenStub(50, imp, length, f0);
-stub.addToSmithChart(cadena);
-stub.plotImpedanceCircles(theta);
-#stub.labelOnChart();
-# Adding series inductor to complete matching
-imp2 = stub.getImpedance(); 
-imp2 += Xl;
-#Showing new Impedance in the SmithChart
-ZL2 = Impedance(Z0, imp2);
-ZL2.addToSmithChart(cadena);
-ZL2.plotCircles(theta);
-ZL2.labelOnChart(True);
+Z = Impedance(Z0, imp)
+
+imp1 = Z.getImpedance()
+Z.plotCircles(theta);
+Cap1 = Capacitor(Z0, imp1, 1e-12, f0)
+Cap1.addToSmithChart(theta)
+
+imp2 = Cap1.getImpedance()
+
+TL1 = TransmissionLine(70, Impedance(Z0, imp2), 20, f0)
+TL1.addToSmithChart(theta, "");
+imp3 = TL1.getImpedance();
+TL1.plotImpedanceCircles(theta, "");
+
+Cap2 = Capacitor(Z0, imp3, 2e-12, f0)
+Cap2.addToSmithChart(theta)
+
+
+# # We define our load impedance
+# imp = 150 + 1j*50;
+# ZL = Impedance(Z0, imp);
+# YL = Admittance(Z0, ZL);
+# YL.addToSmithChart(theta);
+# ZL.addToSmithChart(cadena);
+# ZL.plotCircles(theta);
+# #ZL.labelOnChart(True);
+# stub = OpenStub(50, imp, length, f0);
+# stub.addToSmithChart(cadena);
+# stub.plotImpedanceCircles(theta);
+# #stub.labelOnChart();
+# # Adding series inductor to complete matching
+# imp2 = stub.getImpedance(); 
+# imp2 += Xl;
+# #Showing new Impedance in the SmithChart
+# ZL2 = Impedance(Z0, imp2);
+# ZL2.addToSmithChart(cadena);
+# ZL2.plotCircles(theta);
+# ZL2.labelOnChart(True);
 
 
 # Plotting window configuration
