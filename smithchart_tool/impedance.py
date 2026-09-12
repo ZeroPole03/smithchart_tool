@@ -112,10 +112,11 @@ class Impedance:
 
     def addToSmithChart(self, cadena):
         self.cadena = cadena;
-        plt.scatter(self.gr, self.gi, color = 'black');
         plt.plot([0, self.gr], [0, self.gi], 
                     color = 'black', 
-                    label = self.cadena);   
+                    label = self.cadena); 
+                    
+        plt.scatter(self.gr, self.gi, color = 'black'); 
 
     def plotCircles(self, theta, color1 = 'black', color2 = 'black'):
         if(np.abs(self.react) < 1e-3):

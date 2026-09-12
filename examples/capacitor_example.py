@@ -24,27 +24,22 @@ length = 0.081*360.0;
 Z0 = 50.0; L = 4.054e-9;
 Xl = 1j*2*np.pi*f0*L;
 
-
-# We define our load impedance
 imp = 150 + 1j*50;
-ZL = Impedance(Z0, imp);
-YL = Admittance(Z0, ZL);
-YL.addToSmithChart(theta);
-ZL.addToSmithChart(cadena);
-ZL.plotCircles(theta);
-#ZL.labelOnChart(True);
-stub = OpenStub(50, imp, length, f0);
-stub.addToSmithChart(cadena);
-stub.plotImpedanceCircles(theta);
-#stub.labelOnChart();
-# Adding series inductor to complete matching
-imp2 = stub.getImpedance(); 
-imp2 += Xl;
-#Showing new Impedance in the SmithChart
-ZL2 = Impedance(Z0, imp2);
-ZL2.addToSmithChart(cadena);
-ZL2.plotCircles(theta);
-ZL2.labelOnChart(True);
+Z = Impedance(Z0, imp);
+imp1 = Z.getImpedance();
+Adm1 = Admittance(Z0, Z);
+Adm1.addToSmithChart(theta);
+Z.plotCircles(theta);
+Cap1 = Capacitor(Z0, 1/imp1, 1e-12, f0, domain = "admittance");
+Cap1.addToSmithChart(theta, r'1 pF');
+imp2 = Cap1.getImpedance();
+TL1 = TransmissionLine(70, Impedance(Z0, imp2), 20, f0);
+TL1.addToSmithChart(theta, "");
+imp3 = TL1.getImpedance();
+TL1.plotImpedanceCircles(theta, "");
+Cap2 = Capacitor(Z0, imp3, 2e-12, f0);
+Cap2.addToSmithChart(theta, r'2 pF');
+
 
 
 # Plotting window configuration
