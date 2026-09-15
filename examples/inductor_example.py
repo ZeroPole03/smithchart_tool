@@ -35,9 +35,10 @@ L1 = Inductor(Z0, imp, L, f0);
 # Plot whithin the Smith Chart
 Load.addToSmithChart(cadena);
 Load.plotCircles(theta);
-L1.addToSmithChart(theta);
 L1.labelOnChart(False);
-
+NewLoad = Impedance(Z0, L1.getImpedance());
+NewLoad.plotCircles(theta);
+L1.addToSmithChart(theta);
 
 
 # Plotting window configuration
@@ -48,7 +49,7 @@ plt.ylim(-1, 1);
 ax1 = plt.gca();   # eje actual
 #ax2 = ax1.twinx()   # eje Y derecho
 #ax2.set_ylim(1, -1)  # invertido
-#plt.title('Smith Chart');
+plt.title('Smith Chart');
 plt.legend();
 #plt.grid();
 plt.gca().set_aspect('equal');
