@@ -40,16 +40,15 @@ L1.labelOnChart(False);
 
 
 
-
 # Plotting window configuration
 plt.ylabel(r'$Im\{\Gamma\}$');
 plt.xlabel(r'$Re\{\Gamma\}$');
 plt.xlim(-1, 1);
 plt.ylim(-1, 1);
-ax1 = plt.gca()      # eje actual
+ax1 = plt.gca();   # eje actual
 #ax2 = ax1.twinx()   # eje Y derecho
 #ax2.set_ylim(1, -1)  # invertido
-#plt.title('Carta de Smith');
+#plt.title('Smith Chart');
 plt.legend();
 #plt.grid();
 plt.gca().set_aspect('equal');
