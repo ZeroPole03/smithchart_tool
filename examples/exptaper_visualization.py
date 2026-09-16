@@ -17,7 +17,7 @@ plt.rcParams.update({
 
 er = 3.66              # Permitividad relativa RO4350B
 h = 0.762e-3           # Altura del sustrato [m]
-t = 18e-6              # Espesor del cobre [m]
+t = 35e-6              # Espesor del cobre [m]
 f0 = 3e9               # Frecuencia central [Hz]
 # Resistividad aproximada del cobre
 rho_cu = 1.68e-8       # Ohm*m
@@ -146,7 +146,7 @@ physical_position = 0.0;
 
 # TAPER EXPONENCIAL
 for k in range(N):
-    x = (k + 0.25) / N
+    x = (k + 0.5) / N
     Z0k = (Z_start *(Z_end / Z_start)**x);
     # Guardamos impedancia objetivo
     Z_sections.append(Z0k);

@@ -23,7 +23,7 @@ plt.figure(figsize = (8, 8));
 theta = np.linspace(0, 2*np.pi, 1000);
 smith = SmithChart(theta, unitary = False);
 smith.plotChart(admittance = False); cadena = r'';
-f0=3e9; Xc = -1j/(2*np.pi*f0*9.9999e-12);
+f0=3e9; C = 9.9999e-12;
 
 # Interconexión de los componentes de la red
 Z0 = 50.0;
@@ -33,11 +33,10 @@ TL1 = TransmissionLine(82, Z1, 71.39, f0);
 #TL1.plotImpedanceCircles(theta, cadena);
 TL1.addToSmithChart(theta, cadena);
 Z1.addToSmithChart(cadena);
-imp = TL1.getImpedance();
-imp += Xc;
-Z3 = Impedance(Z0, imp);
+Cap = Capacitor(Z0, TL1.getImpedance(), C, f0);
+Z3 = Impedance(Z0, Cap.getImpedance());
 Z3.addToSmithChart(cadena);
-Z3.plotCircles(theta);
+Cap.addToSmithChart(theta, cadena);
 TL2 = TransmissionLine(77, Z3, 41.86, f0);
 #TL2.plotImpedanceCircles(theta, cadena);
 TL2.addToSmithChart(theta, cadena);

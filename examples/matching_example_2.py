@@ -18,7 +18,7 @@ plt.rcParams.update({
 # We plot the Chart First
 plt.figure(figsize = (8, 8));
 theta = np.linspace(0, 2*np.pi, 1000);
-Chart = SmithChart(theta, unitary = False); cadena = r'';
+Chart = SmithChart(theta, unitary = True); cadena = r'';
 Chart.plotChart(admittance = False); f0 = 3e9;
 length = 0.081*360.0;
 Z0 = 50.0; L = 4.054e-9; 
