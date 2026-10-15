@@ -23,12 +23,13 @@ plt.figure(figsize = (8, 8));
 theta = np.linspace(0, 2*np.pi, 1000);
 smith = SmithChart(theta, unitary = False);
 smith.plotChart(admittance = False); cadena = r'';
-f0=3e9; Xc = -1j/(2*np.pi*f0*10.0e-12);
+f0=3e9; 
 
 # Interconectamos los elementos del circuito
 Z0 = 50.0;
 Z1 = Impedance(Z0, Z0);
 Z1.addToSmithChart(cadena);
+C = 10.0e-12;
 imp0 = Z1.getImpedance();
 # Open Stub
 stub1 = OpenStub(90.0, imp0, 28.49, f0);
@@ -42,11 +43,11 @@ TL2.addToSmithChart(theta, cadena);
 Z5 = Impedance(Z0, TL2.getImpedance());
 TL3 = TransmissionLine(40, Z5, 7.391, f0);
 TL3.addToSmithChart(theta, cadena);
-imp = TL3.getImpedance();
-imp += Xc;
-Z6 = Impedance(Z0, imp);
+Cap1 = Capacitor(Z0, TL3.getImpedance(), C, f0);
+Z6 = Impedance(Z0, Cap1.getImpedance());
 Z6.plotCircles(theta);
 Z6.addToSmithChart(cadena);
+Cap1.addToSmithChart(theta, cadena);
 TL4 = TransmissionLine(40, Z6, 11.56, f0);
 TL4.addToSmithChart(theta, cadena);
 TL4.labelOnChart(True);
