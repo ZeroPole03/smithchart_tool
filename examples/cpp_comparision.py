@@ -74,7 +74,7 @@ TL3.labelOnChart(True)
 # CARGAR TRAYECTORIAS GENERADAS POR C++
 # ==========================================================
 
-cpp_data = pd.read_csv("cpp_trajectories.csv")
+cpp_data = pd.read_csv("examples/cpp_trajectories.csv")
 
 
 # ==========================================================

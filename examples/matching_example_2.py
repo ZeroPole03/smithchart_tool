@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 from smithchart_tool import *
 
 plt.rcParams.update({
@@ -12,11 +13,15 @@ plt.rcParams.update({
     "legend.fontsize": 16,     # Tamaño de las leyendas
 })
 # Window plot parameters
-# plt.rcParams['figure.facecolor'] = '#b3b3b3ff';
-# plt.rcParams['axes.facecolor'] = '#f4f4f4ff';
+plt.rcParams['figure.facecolor'] = '#b3b3b3ff';
+plt.rcParams['axes.facecolor'] = '#f4f4f4ff';
 
 # We plot the Chart First
 plt.figure(figsize = (8, 8));
+cpp_data = pd.read_csv("examples/cpp_trajectoriesExample.csv")
+
+elements = ["STUB1", "L1"]
+
 theta = np.linspace(0, 2*np.pi, 1000);
 Chart = SmithChart(theta, unitary = True); cadena = r'';
 Chart.plotChart(admittance = False); f0 = 3e9;
@@ -44,7 +49,20 @@ ZL2.plotCircles(theta);
 L1.addToSmithChart(theta, cadena);
 ZL2.labelOnChart(True);
 
+## comparison
+for element in elements:
+    data = cpp_data[cpp_data["element"] == element]
 
+    gamma_real = data["real"].to_numpy()
+    gamma_imag = data["imag"].to_numpy()
+
+    plt.plot(
+        gamma_real,
+        gamma_imag,
+        linestyle="--",
+        linewidth=2,
+        label=element + " C++"
+    )
 
 # Plotting window configuration
 plt.ylabel(r'$Im\{\Gamma\}$');
