@@ -85,7 +85,7 @@ elements = [
     "TL1",
     "CAP",
     "TL2",
-    "STUB",
+    "STUB1",
     "TL3"
 ]
 
@@ -120,5 +120,168 @@ ax1 = plt.gca()
 plt.legend()
 
 plt.gca().set_aspect('equal')
+
+
+# =========================================================
+# C++ Input Gamma response
+# =========================================================
+
+gamma_data = np.loadtxt(
+    "examples/cpp_Gamma.csv",
+    delimiter=",",
+    skiprows=1
+)
+
+frequency = gamma_data[:, 0] / 1e9
+gamma_real = gamma_data[:, 1]
+gamma_imag = gamma_data[:, 2]
+
+gamma = gamma_real + 1j*gamma_imag
+
+gamma_db = 20.0 * np.log10(np.abs(gamma))
+
+gamma_phase = np.angle(
+    gamma,
+    deg=True)
+
+gamma_phase = np.rad2deg(
+    np.unwrap(
+        np.deg2rad(gamma_phase)
+    )
+)
+
+fig, ax1 = plt.subplots()
+
+ax1.plot(
+    frequency,
+    gamma_db,
+    lw = 2.0,
+    color = 'black',
+    label = r'$|\Gamma_{in}|$'
+)
+
+ax1.set_xlabel("Frequency (GHz)")
+ax1.set_ylabel(r"$|\Gamma_{in}|$ (dB)")
+ax1.grid()
+
+ax2 = ax1.twinx()
+
+ax2.plot(
+    frequency,
+    gamma_phase,
+    linestyle = '--',
+    lw = 2.0,
+    color = 'red',
+    label = r'$\angle\,\,\Gamma_{in}$'
+)
+
+ax2.set_ylabel(
+    r"$\angle\,\,\Gamma_{in}$ (°)"
+)
+
+#plt.title("Input Reflection Coefficient")
+
+fig.tight_layout()
+lines1, labels1 = ax1.get_legend_handles_labels()
+lines2, labels2 = ax2.get_legend_handles_labels()
+
+ax1.legend(
+    lines1 + lines2,
+    labels1 + labels2,
+    loc = 'best'
+)
+
+# =========================================================
+# C++ Transmission response
+# =========================================================
+
+transmission_data = np.loadtxt(
+    "examples/cpp_Transmission.csv",
+    delimiter=",",
+    skiprows=1
+)
+
+transmission_frequency = (
+    transmission_data[:, 0] / 1e9
+)
+
+transmission_real = transmission_data[:, 1]
+transmission_imag = transmission_data[:, 2]
+
+transmission = (
+    transmission_real +
+    1j * transmission_imag
+)
+
+transmission_mag = np.abs(
+    transmission
+)
+
+transmission_db = 20.0 * np.log10(
+    transmission_mag
+)
+
+transmission_phase = np.angle(
+    transmission,
+    deg=True
+)
+
+transmission_phase = np.rad2deg(
+    np.unwrap(
+        np.deg2rad(transmission_phase)
+    )
+)
+
+fig, ax1 = plt.subplots()
+
+ax1.plot(
+    transmission_frequency,
+    transmission_db,
+    lw = 2.0,
+    color = 'black',
+    label = r'T'
+)
+
+ax1.set_xlabel("Frequency (GHz)")
+ax1.set_ylabel(
+    r"$|T|$ (dB)"
+)
+
+ax1.grid()
+
+ax2 = ax1.twinx()
+
+ax2.plot(
+    transmission_frequency,
+    transmission_phase,
+    lw = 2.0,
+    color = 'red',
+    linestyle = '--',
+    label = r'$\angle T$'
+)
+
+ax2.set_ylabel(
+    r"$\angle\,\,T$ (°)"
+)
+
+#plt.title("Transmission Response")
+
+fig.tight_layout()
+ax2.set_ylabel(
+    r"$\angle\,\,T$ (°)"
+)
+
+#plt.title("Transmission Response")
+
+lines1, labels1 = ax1.get_legend_handles_labels()
+lines2, labels2 = ax2.get_legend_handles_labels()
+
+ax1.legend(
+    lines1 + lines2,
+    labels1 + labels2,
+    loc = 'best'
+)
+
+fig.tight_layout()
 
 plt.show()
