@@ -176,7 +176,7 @@ ax2.plot(
 )
 
 ax2.set_ylabel(
-    r"$\angle\,\,\Gamma_{in}$ (°)"
+    r"$\angle\,\,\Gamma_{in}$ [Deg]"
 )
 
 #plt.title("Input Reflection Coefficient")
@@ -261,14 +261,14 @@ ax2.plot(
 )
 
 ax2.set_ylabel(
-    r"$\angle\,\,T$ (°)"
+    r"$\angle\,\,T$ [Deg]"
 )
 
 #plt.title("Transmission Response")
 
 fig.tight_layout()
 ax2.set_ylabel(
-    r"$\angle\,\,T$ (°)"
+    r"$\angle\,\,T$ [Deg]"
 )
 
 #plt.title("Transmission Response")

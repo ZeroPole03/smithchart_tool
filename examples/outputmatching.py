@@ -184,9 +184,9 @@ ax2.set_ylabel(
     r'$\angle\Gamma_{in}$ [Deg]'
 )
 
-plt.title(
-    r'Respuesta en frecuencia de $\Gamma_{in}$'
-)
+# plt.title(
+#     r'Respuesta en frecuencia de $\Gamma_{in}$'
+# )
 
 lines1, labels1 = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
@@ -283,9 +283,9 @@ ax2.set_ylabel(
     r'$\angle T$ [Deg]'
 )
 
-plt.title(
-    r'Respuesta en frecuencia de transmisión'
-)
+# plt.title(
+#     r'Respuesta en frecuencia de transmisión'
+# )
 
 lines1, labels1 = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
